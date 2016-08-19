@@ -20,5 +20,22 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-  });
-})
+  })
+  .config(function ($stateProvider, $urlRouterProvider) {
+  $stateProvider
+    .state('app',{
+      url: 'app',
+      abstract: true,
+      templateUrl: 'templates/menu.html'
+    })
+    .state('app.main',{
+      url: '/main',
+      views:{
+      'menuContent':{
+        templateUrl:'templates/main.html',
+        controller: 'mainCtrl'
+      }
+      }
+    })
+  })
+});
