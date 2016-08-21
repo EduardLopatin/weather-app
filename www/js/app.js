@@ -3,39 +3,77 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  .run(function($ionicPlatform) {
+    $ionicPlatform.ready(function() {
+      if(window.cordova && window.cordova.plugins.Keyboard) {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+        // Don't remove this line unless you know what you are doing. It stops the viewport
+        // from snapping when text inputs are focused. Ionic handles this internally for
+        // a much nicer keyboard experience.
+        cordova.plugins.Keyboard.disableScroll(true);
+      }
+      if(window.StatusBar) {
+        StatusBar.styleDefault();
+      }
+    })
   })
   .config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider
-    .state('app',{
-      url: 'app',
-      abstract: true,
-      templateUrl: 'templates/menu.html'
-    })
-    .state('app.main',{
-      url: '/main',
-      views:{
-      'menuContent':{
-        templateUrl:'templates/main.html',
-        controller: 'mainCtrl'
-      }
-      }
-    })
+    $stateProvider
+      .state('app',{
+        url: '/app',
+        abstract: true,
+        templateUrl: 'templates/menu.html'
+      })
+      .state('app.main',{
+        url: '/main',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/main.html',
+            controller: 'mainCtrl'
+          }
+        }
+      })
+      .state('app.more-info', {
+        url:'/more-info',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/more-info.html',
+            controller:'moreInfoCtrl'
+          }
+        }
+      })
+
+      .state('app.search',{
+        url: '/search',
+        views:{
+          'menuContent':{
+            templateUrl: 'templates/search.html',
+            controller: 'searchCtrl'
+          }
+        }
+      })
+      .state('app.city-list', {
+        url: '/city-list',
+        views: {
+          'menuContent':{
+            templateUrl: 'templates/city-list.html',
+            controller: 'cityListCtrl'
+          }
+        }
+      })
+      .state('app.settings',{
+        url:'/settings',
+        views:{
+          'menuContent':{
+            templateUrl:'templates/settings.html',
+            controller:'settingsCtrl'
+          }
+        }
+      })
+    $urlRouterProvider.otherwise('#app/main');
   })
-});
