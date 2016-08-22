@@ -3,9 +3,9 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
 
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform, $state) {
     $ionicPlatform.ready(function() {
       if(window.cordova && window.cordova.plugins.Keyboard) {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -20,8 +20,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
+      $state.transitionTo('app.city');
     })
   })
+  .constant('myConst',
+    {
+      baseUrl:'http://api.wunderground.com/api/',
+      apiKey: '0c1a01258e360c5e',
+      url: 'https://api.wunderground.com/api/0c1a01258e360c5e/',
+      main_param: 'conditions/q/',
+      forecast_param: 'forecast/q/',
+      hourly_param: 'hourly/q/'
+    })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('app',{
@@ -38,16 +48,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
       })
-      .state('app.more-info', {
-        url:'/more-info',
+      .state('app.moreInfo', {
+        url:'/moreInfo',
         views:{
           'menuContent':{
-            templateUrl:'templates/more-info.html',
+            templateUrl:'templates/moreInfo.html',
             controller:'moreInfoCtrl'
           }
         }
       })
-
       .state('app.search',{
         url: '/search',
         views:{
@@ -57,15 +66,25 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
       })
-      .state('app.city-list', {
-        url: '/city-list',
+      .state('app.cityList', {
+        url: '/cityList',
         views: {
           'menuContent':{
-            templateUrl: 'templates/city-list.html',
+            templateUrl: 'templates/cityList.html',
             controller: 'cityListCtrl'
           }
         }
       })
+      .state('app.city', {
+        url: '/city',
+        views: {
+          'menuContent':{
+            templateUrl: 'templates/city.html',
+            controller: 'cityCtrl'
+          }
+        }
+      })
+
       .state('app.settings',{
         url:'/settings',
         views:{
@@ -75,5 +94,5 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
           }
         }
       })
-    $urlRouterProvider.otherwise('#app/main');
+    $urlRouterProvider.otherwise('app/main');
   })

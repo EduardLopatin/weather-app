@@ -1,4 +1,11 @@
 <ion-view>
-  main
-  <a ui-sref="app.more-info">more</a>
+  <ion-header-bar class="bar bar-clear">
+    <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
+    <button ui-sref="app.moreInfo" class="button button-clear button-dark ">more</button>
+  </ion-header-bar>
+  <ion-content>
+    Coords:{{loc}}<br>
+ Location: {{mainInfo.display_location.full}}<br>
+ Year:  {{forecastInfo.simpleforecast.forecastday[0].date.year}}<br>
+  </ion-content>
 </ion-view>
