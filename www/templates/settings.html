@@ -3,6 +3,26 @@
     <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
   </ion-header-bar>
   <ion-content>
-    settings
+    <div class="list">
+      <div class="item">
+        Celsius
+        <label class="toggle toggle-royal">
+          <input type="checkbox" ng-model="settings.cel" value="true">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+      <div class="item">
+        Farengate
+        <label  class="toggle toggle-calm">
+          <input ng-model="settings.far" type="checkbox" value="true">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </div>
+    </div>
   </ion-content>
+
 </ion-view>

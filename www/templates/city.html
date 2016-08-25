@@ -1,20 +1,23 @@
 <ion-view>
   <ion-content>
   <div class="bar bar-clear">
-  <button menu-toggle="left" class="button-dark button-clear ion-android-menu"></button>
-  <button ui-sref="app.moreInfo" class="button button-clear button-dark ">more</button>
+    <button ng-click="back()" class="button button-clear button-dark ion-backspace"></button>
+  <button ng-click="getMoreInfo(searchCityMainInfo.display_location.latitude,searchCityMainInfo.display_location.longitude)"
+          ui-sref="app.moreInfo" class="button button-clear button-dark "
+          ng-controller="moreInfoCtrl">more</button>
 </div>
     <br>
     <br>
     <br>
     <br>
-    <button ng-controller="cityListCtrl"
+    <h1> {{searchCityMainInfo.display_location.full}}</h1>
+    <h1>{{searchCityMoreInfo.forecast.simpleforecast.forecastday[0].date.pretty}}</h1>
+    <button ng-controller="cityCtrl"
             class="button button-royal"
-            ng-click="addCity(searchInfo.display_location.full)">
+            ng-click="addCityInList(searchCityMainInfo.display_location.full,
+                                    searchCityMainInfo.display_location.latitude,
+                                    searchCityMainInfo.display_location.longitude)">
       add city
-    </button>
-    <button ng-controller="moreInfoCtrl" ng-click="getMoreInfo(searchInfo.display_location)" ui-sref="app.moreInfo">
-      more
     </button>
 </ion-content>
 </ion-view>

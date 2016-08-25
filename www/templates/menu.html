@@ -13,7 +13,7 @@
       <ion-item menu-close href="#app/search">
         search
       </ion-item>
-      <ion-item menu-close href="#app/city-list">
+      <ion-item ng-if="$root.cityArray.length > 0" menu-close href="#app/cityList">
         cityList
       </ion-item>
       <ion-item menu-close href="#app/settings">

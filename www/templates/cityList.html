@@ -3,6 +3,13 @@
     <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
   </ion-header-bar>
   <ion-content>
-    cityList
+    <div class="list">
+      <div class="item"
+           ng-repeat="item in cityArray"
+           ng-click="showCity(item.loc, item.name)"
+           ui-sref="app.city">
+        {{item.name}}<button class="button" ng-click="removeCity(item.loc)">remove</button>
+      </div>
+    </div>
   </ion-content>
 </ion-view>
