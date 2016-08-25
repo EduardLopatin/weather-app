@@ -1,0 +1,55 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'rebuild',
+1 verbose cli   'node-sass' ]
+2 info using npm@2.15.9
+3 info using node@v4.5.0
+4 info readInstalled object
+5 verbose rebuild path, id [ '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/node-sass',
+5 verbose rebuild   'node-sass@3.8.0' ]
+6 verbose rebuild path, id [ '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/node-sass',
+6 verbose rebuild   'node-sass@3.8.0' ]
+7 silly rebuild set [ '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/node-sass',
+7 silly rebuild set   '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/node-sass' ]
+8 info build /Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/node-sass
+9 info preinstall node-sass@3.8.0
+10 info linkStuff node-sass@3.8.0
+11 silly linkStuff node-sass@3.8.0 has /Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules as its parent node_modules
+12 verbose linkBins node-sass@3.8.0
+13 verbose link bins [ { 'node-sass': 'bin/node-sass' },
+13 verbose link bins   '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/.bin',
+13 verbose link bins   false ]
+14 verbose linkMans node-sass@3.8.0
+15 verbose rebuildBundles node-sass@3.8.0
+16 silly gentlyRm /Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/.bin/node-sass is being purged
+17 verbose gentlyRm don't care about contents; nuking /Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/.bin/node-sass
+18 verbose rebuildBundles [ '.bin',
+18 verbose rebuildBundles   'async-foreach',
+18 verbose rebuildBundles   'chalk',
+18 verbose rebuildBundles   'cross-spawn',
+18 verbose rebuildBundles   'gaze',
+18 verbose rebuildBundles   'get-stdin',
+18 verbose rebuildBundles   'glob',
+18 verbose rebuildBundles   'in-publish',
+18 verbose rebuildBundles   'meow',
+18 verbose rebuildBundles   'mkdirp',
+18 verbose rebuildBundles   'nan',
+18 verbose rebuildBundles   'node-gyp',
+18 verbose rebuildBundles   'request',
+18 verbose rebuildBundles   'sass-graph' ]
+19 verbose stack Error: Unknown system error -102: Unknown system error -102, symlink '../node-sass/bin/node-sass' -> '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/.bin/node-sass'
+19 verbose stack     at Error (native)
+20 verbose cwd /Volumes/VMware Shared Folders/eduard/Documents/weather-app
+21 error Darwin 15.6.0
+22 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "rebuild" "node-sass"
+23 error node v4.5.0
+24 error npm  v2.15.9
+25 error path ../node-sass/bin/node-sass
+26 error code Unknown system error -102
+27 error errno -102
+28 error syscall symlink
+29 error Unknown system error -102: Unknown system error -102, symlink '../node-sass/bin/node-sass' -> '/Volumes/VMware Shared Folders/eduard/Documents/weather-app/node_modules/gulp-sass/node_modules/.bin/node-sass'
+30 error If you need help, you may report this error at:
+30 error     <https://github.com/npm/npm/issues>
+31 verbose exit [ -102, true ]

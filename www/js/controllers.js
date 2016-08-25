@@ -1,8 +1,13 @@
 angular.module('starter.controllers',[])
   .controller('mainCtrl', function ($rootScope, $cordovaGeolocation, myConst, getInfo, $ionicHistory) {
-    // $rootScope.back = function () {
-    //   $ionicHistory.goBack();
-    // };
+    if(localStorage.getItem('cityList') == null){
+      $rootScope.cityArray = [];
+    }else {
+      $rootScope.cityArray = JSON.parse(localStorage.getItem('cityList')).slice();
+    }
+    $rootScope.back = function () {
+      $ionicHistory.goBack();
+    };
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
 $rootScope.getPosition = function () {
   $cordovaGeolocation
@@ -37,10 +42,28 @@ $rootScope.getPosition();
         }
       )
   })
-  .controller('searchCtrl', function () {
-
+  .controller('searchCtrl', function ($scope, $rootScope, getSearch, getInfo, arrayFilter) {
+    $scope.getSearchInput = function(search) {
+      getSearch.getInput(search);
+    };
+    $scope.getSearchCityInfo = function(lat, lon, name) {
+      $scope.searchLoc = lat + ',' + lon;
+      $scope.searchName = name;
+      getInfo.getWeatherMainInfo($scope.searchLoc)
+        .then(function (resp) {
+          $rootScope.searchInfo = resp.data.current_observation;
+          $rootScope.searchInfo.display_location.full = $scope.searchName;
+        });
+      getInfo.getWeatherHourlyForecastInfo($scope.searchLoc)
+        .then(function (resp) {
+          console.log(resp.data);
+          var searchHours = resp.data.hourly_forecast;
+          $rootScope.searchHours = arrayFilter.getPosition(searchHours, 3);
+          console.log($rootScope.searchHours);
+        });
+    };
   })
-  .controller('cityListCtrl', function () {
+  .controller('cityListCtrl', function ($scope, $rootScope, $http, getInfo, arrayFilter, getSearch) {
 
   })
   .controller('cityCtrl', function () {

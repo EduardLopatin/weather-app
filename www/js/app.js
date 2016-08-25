@@ -20,7 +20,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       if(window.StatusBar) {
         StatusBar.styleDefault();
       }
-      $state.transitionTo('app.city');
+      $state.transitionTo('app.main');
     })
   })
   .constant('myConst',
@@ -31,6 +31,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       main_param: 'conditions/q/',
       forecast_param: 'forecast/q/',
       hourly_param: 'hourly/q/'
+    })
+  .value('myVar',
+    {
+
     })
   .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider

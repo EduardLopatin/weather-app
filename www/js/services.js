@@ -22,3 +22,39 @@ angular.module('starter.services', [])
       getWeatherHourlyForecastInfo: getWeatherHourlyForecastInfo
     }
   })
+  .factory('getSearch', function($rootScope, $http){
+
+    function getAuto(searchVar){
+      searchVar = searchVar.replace(/ /g, "&ensp;");
+      console.log("http://autocomplete.wunderground.com/aq?query=" + searchVar);
+      return $http.get("http://autocomplete.wunderground.com/aq?query=" + searchVar);
+    }
+    function getInput(searchVar)
+    {
+      console.log('searchGet:'+searchVar);
+      if(searchVar.length >= 3)
+        getAuto(searchVar)
+          .then(function (resp) {
+            $rootScope.searchRes = resp.data.RESULTS
+          });
+      else {
+        $rootScope.searchRes = null;
+      }
+    }
+    return{
+      getAuto: getAuto,
+      getInput: getInput
+    }
+  })
+  .factory('arrayFilter', function () {
+    function getPosition(array, position) {
+      return array.filter(function (array, pos) {
+        if (pos % position == 0){
+          return array
+        }
+      })
+    }
+    return {
+      getPosition: getPosition
+    }
+  });

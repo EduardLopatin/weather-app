@@ -1,8 +1,19 @@
 <ion-view>
-  <ion-header-bar class="bar bar-clear">
+  <div class="list">
+  <div class="item">
     <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
-  </ion-header-bar>
-  <ion-content>
+  </div>
+    <div class="item">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Search" ng-model="search" ng-change="getSearchInput(search)">
+      </label>
+    </div>
+    <div class="item" ui-sref="app.city" ng-repeat="item in searchRes"
+                      ng-hide="item.lat == -9999.000000"
+                      ng-click="getSearchCityInfo(item.lat, item.lon, item.name)">
+      {{item.name}}
+    </div>
+  </div>
 search
-  </ion-content>
 </ion-view>

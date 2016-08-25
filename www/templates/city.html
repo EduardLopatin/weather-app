@@ -1,9 +1,20 @@
 <ion-view>
-<ion-header-bar class="bar bar-royal">
-  <button menu-toggle="left" class="button-dark button-clear ion-android-menu"></button><!--menu button error-->
+  <ion-content>
+  <div class="bar bar-clear">
+  <button menu-toggle="left" class="button-dark button-clear ion-android-menu"></button>
   <button ui-sref="app.moreInfo" class="button button-clear button-dark ">more</button>
-</ion-header-bar>
-<ion-content>
-  city
+</div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <button ng-controller="cityListCtrl"
+            class="button button-royal"
+            ng-click="addCity(searchInfo.display_location.full)">
+      add city
+    </button>
+    <button ng-controller="moreInfoCtrl" ng-click="getMoreInfo(searchInfo.display_location)" ui-sref="app.moreInfo">
+      more
+    </button>
 </ion-content>
 </ion-view>

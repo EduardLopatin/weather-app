@@ -1,9 +1,9 @@
 <ion-view>
-  <ion-header-bar class="bar bar-royal">
-    <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
-    <button ng-click="back()" class="button button-clear button-dark ion-backspace"></button>
-  </ion-header-bar>
   <ion-content>
+  <div class="bar bar-clear">
+      <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
+    <button ng-click="back()" class="button button-clear button-dark ion-backspace"></button>
+  </div>
     Temp: {{hourlyForecastInfo[0].temp.metric}}
   </ion-content>
 </ion-view>
