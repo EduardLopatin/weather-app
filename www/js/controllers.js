@@ -80,20 +80,31 @@ angular.module('starter.controllers',[])
     })
   }
   })
-  .controller('cityCtrl', function ($rootScope) {
+  .controller('cityCtrl', function ($scope, $rootScope) {
     $rootScope.addCityInList = function (name, lat, lon) {
-      $rootScope.cityArray.push(
-        {
-          name: name,
+     $scope.obj =  {
+        name: name,
           loc: lat + ',' + lon
+      };
+      if($rootScope.cityArray == null){
+        $rootScope.cityArray.push($scope.obj);
+      }else {
+        $rootScope.cityArray.forEach(function(item, i, arr){
+          if ($scope.obj.name == item.name){
+            arr.splice(i, 1)
+          }
+          else {
+            console.log('all fine!')
+          }
         });
+      }
       localStorage.setItem('cityList',JSON.stringify($rootScope.cityArray));
       console.log($rootScope.cityArray);
     }
   })
 
   .controller('settingsCtrl', function ($rootScope) {
-
-    $rootScope.changeSet = function () {
-  }
+$rootScope.changeCel = function ($rootScope) {
+  $rootScope.settings = []
+}
   });

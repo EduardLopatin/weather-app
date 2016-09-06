@@ -26,18 +26,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }else {
         $rootScope.cityArray = JSON.parse(localStorage.getItem('cityList'))
       }
-      //settings get
-      if(localStorage.getItem('settings') == null){
-        $rootScope.settings = {
-          cel: true,
-          far: true
-        };
-
-        localStorage.setItem('settings', JSON.stringify($rootScope.settings))
-      }
-      else {
-        $rootScope.settings = JSON.parse(localStorage.getItem('settings'));
-      }
       $state.transitionTo('app.main');
     })
   })
