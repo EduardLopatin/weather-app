@@ -12,7 +12,7 @@
     <br>
     <h1> {{searchCityMainInfo.display_location.full}}</h1>
     <h1>{{searchCityMoreInfo.forecast.simpleforecast.forecastday[0].date.pretty}}</h1>
-    <button ng-controller="cityCtrl"
+    <button ng-hide="" ng-controller="cityCtrl"
             class="button button-royal"
             ng-click="addCityInList(searchCityMainInfo.display_location.full,
                                     searchCityMainInfo.display_location.latitude,

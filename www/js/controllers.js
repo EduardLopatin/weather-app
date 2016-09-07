@@ -82,24 +82,18 @@ angular.module('starter.controllers',[])
   })
   .controller('cityCtrl', function ($scope, $rootScope) {
     $rootScope.addCityInList = function (name, lat, lon) {
-     $scope.obj =  {
-        name: name,
+        $rootScope.cityArray.push({
+          name: name,
           loc: lat + ',' + lon
-      };
-      if($rootScope.cityArray == null){
-        $rootScope.cityArray.push($scope.obj);
-      }else {
-        $rootScope.cityArray.forEach(function(item, i, arr){
-          if ($scope.obj.name == item.name){
-            arr.splice(i, 1)
-          }
-          else {
-            console.log('all fine!')
-          }
         });
-      }
       localStorage.setItem('cityList',JSON.stringify($rootScope.cityArray));
       console.log($rootScope.cityArray);
+      $rootScope.cityArray.forEach(function (item, i , arr) {
+       if(item.name == name){
+         console.log('eye!');
+         return true;
+       }
+      })
     }
   })
 
