@@ -1,5 +1,6 @@
-angular.module('starter.controllers',[])
-  .controller('mainCtrl', function ($rootScope, $cordovaGeolocation, myConst, getInfo, $ionicHistory) {
+angular
+  .module('starter.controllers', [])
+  .controller('mainCtrl', function ($rootScope, $cordovaGeolocation, myConst, getInfo, $ionicHistory, getStyle) {
     $rootScope.back = function () {
       $ionicHistory.goBack();
     };
@@ -14,13 +15,19 @@ angular.module('starter.controllers',[])
             .then(function (resp) {
                 $rootScope.mainInfo = resp.data.current_observation;
                 console.log('mainInfo: ' + $rootScope.mainInfo);
+              var date =new Date($rootScope.mainInfo.local_time_rfc822);
+              var CheckTime = date.getHours(CheckTime);
+              console.log("result" + CheckTime);
+              $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
+              $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime)
               }
             );
           getInfo.getWeatherForecastInfo($rootScope.loc)
             .then(
               function (resp) {
-                $rootScope.forecastInfo = resp.data.forecast;
+                $rootScope.forecastInfo = resp.data.forecast.simpleforecast.forecastday;
                 console.log('forecastInfo: ' + $rootScope.forecastInfo);
+
               }
             )
         });
@@ -28,7 +35,7 @@ angular.module('starter.controllers',[])
     $rootScope.getPosition();
 
   })
-  .controller('moreInfoCtrl', function ($rootScope, getInfo) {
+  .controller('moreInfoCtrl', function ($scope, $rootScope, getInfo) {
     $rootScope.getMoreInfo = function (lat, lon) {
       var loc = lat + ',' + lon;
       getInfo.getWeatherHourlyForecastInfo(loc)
@@ -36,11 +43,35 @@ angular.module('starter.controllers',[])
           function (resp) {
             $rootScope.hourlyForecastInfo = resp.data.hourly_forecast;
             console.log('hourlyForecastInfo: ' + $rootScope.hourlyForecastInfo);
+            $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+            $scope.series = ['Series A', 'Series B'];
+            console.log($rootScope.hourlyForecastInfo);
+            // $scope.data = [];
+            // $rootScope.hourlyForecastInfo.forEach(function (item, i, arr) {
+            //   $scope.data.push(item.FCTTIME.hour)
+            // });
+            // console.log('data:' + $scope.data);
+            // $scope.onClick = function (points, evt) {
+            //   console.log(points, evt);
+            // };
+            // $scope.datasetOverride = { yAxisID: 'y-axis-1' };
+            // $scope.options = {
+            //   scales: {
+            //     yAxes: [
+            //       {
+            //         id: 'y-axis-1',
+            //         type: 'linear',
+            //         display: true,
+            //         position: 'left'
+            //       }
+            //     ]
+            //   }
+            // };
           }
         )
     };
   })
-  .controller('searchCtrl', function ($rootScope, getSearch, getInfo) {
+  .controller('searchCtrl', function ($rootScope, getSearch, getInfo, getStyle) {
     $rootScope.getSearchInput = function (search) {
       getSearch.getInput(search);
     };
@@ -54,12 +85,19 @@ angular.module('starter.controllers',[])
         });
       getInfo.getWeatherForecastInfo(loc)
         .then(function (resp) {
-          $rootScope.searchCityMoreInfo = resp.data;
+          $rootScope.searchCityMoreInfo = resp.data.forecast.simpleforecast.forecastday;
+        })
+      getInfo.getWeatherHourlyForecastInfo(loc)
+        .then(function (resp) {
+          $rootScope.searchHourlyForecastInfo = resp.data.hourly_forecast;
+          var CheckTime = $rootScope.searchHourlyForecastInfo[0].FCTTIME.hour;
+          console.log('res '+CheckTime);
+          $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
+          $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime)
         })
     }
-
   })
-  .controller('cityListCtrl', function ($rootScope, getInfo) {
+  .controller('cityListCtrl', function ($rootScope, getInfo, getStyle) {
   $rootScope.showCity = function (loc, name) {
     getInfo.getWeatherMainInfo(loc)
       .then(function (resp) {
@@ -68,18 +106,17 @@ angular.module('starter.controllers',[])
       });
     getInfo.getWeatherForecastInfo(loc)
       .then(function (resp) {
-        $rootScope.searchCityMoreInfo = resp.data;
+        $rootScope.searchCityMoreInfo = resp.data.forecast.simpleforecast.forecastday;
       })
-  }
-  $rootScope.removeCity = function(loc) {
-    $rootScope.cityArray.forEach(function (item,index) {
-      if(item.loc = loc){
-        $rootScope.cityArray.splice(index,1);
-        localStorage.setItem('cityList', JSON.stringify($rootScope.cityArray))
-      }
-    })
-  }
-  })
+    getInfo.getWeatherHourlyForecastInfo(loc)
+      .then(function (resp) {
+        $rootScope.searchHourlyForecastInfo = resp.data.hourly_forecast;
+        var CheckTime = $rootScope.searchHourlyForecastInfo[0].FCTTIME.hour;
+        console.log('res '+CheckTime);
+        $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
+        $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime)
+      })
+  }})
   .controller('cityCtrl', function ($scope, $rootScope) {
     $rootScope.addCityInList = function (name, lat, lon) {
         $rootScope.cityArray.push({
@@ -88,17 +125,14 @@ angular.module('starter.controllers',[])
         });
       localStorage.setItem('cityList',JSON.stringify($rootScope.cityArray));
       console.log($rootScope.cityArray);
-      $rootScope.cityArray.forEach(function (item, i , arr) {
-       if(item.name == name){
-         console.log('eye!');
-         return true;
-       }
+    };
+    $rootScope.checkCityFun = function (checkName){
+      $rootScope.cityArray.forEach(function (item) {
+        if(item.name == checkName){
+          console.log('works!')
+        }else {
+          console.log('not works!')
+        }
       })
     }
-  })
-
-  .controller('settingsCtrl', function ($rootScope) {
-$rootScope.changeCel = function ($rootScope) {
-  $rootScope.settings = []
-}
   });

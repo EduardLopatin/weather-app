@@ -5,10 +5,13 @@
   <ion-content>
     <div class="list">
       <div class="item"
-           ng-repeat="item in cityArray"
+           ng-repeat="item in cityArray track by $index"
            ng-click="showCity(item.loc, item.name)"
            ui-sref="app.city">
-        {{item.name}}<button class="button" ng-click="removeCity(item.loc)">remove</button>
+        {{item.name}}
+        <div>
+          <button class="button" ng-click="removeCity(item.loc)">remove</button>
+        </div>
       </div>
     </div>
   </ion-content>

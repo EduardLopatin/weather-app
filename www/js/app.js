@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova'])
+angular
+  .module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordova', 'chart.js'])
 
   .run(function($ionicPlatform, $state, $rootScope) {
     $ionicPlatform.ready(function() {
@@ -38,7 +39,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       forecast_param: 'forecast/q/',
       hourly_param: 'hourly/q/'
     })
-  .config(function ($stateProvider, $urlRouterProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, ChartJsProvider) {
     $stateProvider
       .state('app',{
         url: '/app',
@@ -101,4 +102,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
         }
       })
     $urlRouterProvider.otherwise('app/main');
+    ChartJsProvider.setOptions({ colors : [ '#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360'] });
   })
+

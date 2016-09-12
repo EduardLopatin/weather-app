@@ -1,23 +1,41 @@
-<ion-view>
-  <ion-content>
-  <div class="bar bar-clear">
-    <button ng-click="back()" class="button button-clear button-dark ion-backspace"></button>
-  <button ng-click="getMoreInfo(searchCityMainInfo.display_location.latitude,searchCityMainInfo.display_location.longitude)"
-          ui-sref="app.moreInfo" class="button button-clear button-dark "
-          ng-controller="moreInfoCtrl">more</button>
-</div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <h1> {{searchCityMainInfo.display_location.full}}</h1>
-    <h1>{{searchCityMoreInfo.forecast.simpleforecast.forecastday[0].date.pretty}}</h1>
-    <button ng-hide="" ng-controller="cityCtrl"
-            class="button button-royal"
-            ng-click="addCityInList(searchCityMainInfo.display_location.full,
+<div class="container-fluid mkill pkill bg" ng-style="mainStyle">
+  <!--header-->
+  <div class="bar-header bar-clear">
+    <button ng-style="buttonsStyle" class="button button-large button-icon ion-android-arrow-back" ng-click="back()"></button>
+    <button ng-style="buttonsStyle" style="float: right" ui-sref="app.moreInfo" class="button button-clear button-dark" ng-controller="moreInfoCtrl"
+            ng-click="getMoreInfo(searchCityMainInfo.display_location.latitude,
+            searchCityMainInfo.display_location.longitude)">more</button>
+  </div>
+  <!--main block-->
+  <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
+    <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
+      <h5><i class="ion-ios-location-outline"> {{searchCityMainInfo.display_location.full}}</i></h5>
+      <h1 style="margin-top: 7vh">{{searchCityMainInfo.temp_c}}°C</h1>
+      <h5>{{searchCityMainInfo.weather}}</h5>
+      <button ng-controller="cityCtrl"
+              class="button button-royal"
+              ng-click="addCityInList(searchCityMainInfo.display_location.full,
                                     searchCityMainInfo.display_location.latitude,
                                     searchCityMainInfo.display_location.longitude)">
-      add city
-    </button>
-</ion-content>
-</ion-view>
+        add city
+      </button>
+    </div>
+    <!--second block-->
+    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="background: none">
+      <div>
+        <div   ng-repeat="item in forecastInfo | limitTo: -3">
+          <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
+            <div class="mpkill">
+              <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
+                {{item.date.weekday}}
+              </div>
+              <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
+                {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

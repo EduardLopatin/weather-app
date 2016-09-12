@@ -1,12 +1,34 @@
- <div class="bar-header bar-clear">
-    <button menu-toggle="left" class="button button-clear  button-dark ion-android-menu"></button>
-    <button style="float: right" ui-sref="app.moreInfo" class="button button-clear button-dark" ng-controller="moreInfoCtrl"
-            ng-click="getMoreInfo(mainInfo.display_location.latitude, mainInfo.display_location.longitude)">more</button>
+<div class="container-fluid mkill pkill" ng-style="mainStyle">
+  <!--header-->
+  <div class="bar-header bar-clear">
+    <button menu-toggle="left" ng-style="buttonsStyle" class="button button-clear  button-dark ion-android-menu"></button>
+    <button ng-style="buttonsStyle"  style="float: right" ui-sref="app.moreInfo" class="button button-clear button-dark" ng-controller="moreInfoCtrl"
+            ng-click="getMoreInfo(mainInfo.display_location.latitude,
+            mainInfo.display_location.longitude)">more</button>
   </div>
- <div class="mainBlock">
-    Coords:{{loc}}<br>
- Location: {{mainInfo.display_location.full}}<br>
-   temp: <p ng-show="settings.cel">{{mainInfo.temp_c}}*C</p>
-   <p ng-show="settings.far">{{mainInfo.temp_f}}*F</p>
- Year:  {{forecastInfo.simpleforecast.forecastday[0].date.year}}<br>
- </div>
+  <!--main block-->
+  <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
+    <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
+      <h5><i class="ion-ios-location-outline"> {{mainInfo.display_location.full}}</i></h5>
+      <h1 style="margin-top: 7vh">{{mainInfo.temp_c}}°C</h1>
+      <h5>{{mainInfo.weather}}</h5>
+    </div>
+    <!--second block-->
+    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="background: none">
+      <div>
+        <div   ng-repeat="item in forecastInfo | limitTo: -3">
+          <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
+           <div class="mpkill">
+            <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
+              {{item.date.weekday}}
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
+              {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
+            </div>
+           </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
