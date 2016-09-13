@@ -8,13 +8,31 @@
   margin: 0;
   padding: 0;
 }
+.itemList{
+  padding: 15px 0 0 15px;
+}
+.delBtn{
+  margin: 0;
+  padding: 0 25px 15px 10px ;
+  font-size: 25px;
+}
 .step-10{
   height: 10vh;
 }
 .mainBlock{
-  height: 60vh;
+  height: 50vh;
   margin-top: 0vh;
+}
+.secondBlock{
+  font-size: 18px;
 }
 .show{
   background-color: red;
+}
+.loading-container .loading {
+  background-color: white !important;
+  color: #333 !important;
+  border-width: 1px !important;
+  border-color: #999 !important;
+  border-style: solid !important;
 }

@@ -4,13 +4,12 @@
   </ion-header-bar>
   <ion-content>
     <div class="list">
-      <div class="item"
-           ng-repeat="item in cityArray track by $index"
+      <div class="item itemList" ng-repeat="item in cityArray track by $index"
            ng-click="showCity(item.loc, item.name)"
            ui-sref="app.city">
-        {{item.name}}
-        <div>
-          <button class="button" ng-click="removeCity(item.loc)">remove</button>
+             {{item.name}}
+        <div style="float: right" class="delBtn" ng-click="removeCity(item.loc)">
+          <i class="ion-ios-trash-outline"></i>
         </div>
       </div>
     </div>

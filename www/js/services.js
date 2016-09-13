@@ -63,17 +63,17 @@ angular
       var res;
       if (info <= 6){
         res = {
-          'background': 'url("../img/Moon.png")',
+          'background': 'url("img/Moon.png")',
           'background-size': 'cover'
         }
       }if(info >= 7 && info <= 18){
         res = {
-          'background': 'url("../img/Sun.png")',
+          'background': 'url("img/Sun.png")',
           'background-size': 'cover'
         }
       }else {
         res = {
-          'background': 'url("../img/Blood.png")',
+          'background': 'url("img/Moon.png")',
           'background-size': 'cover',
           'color': 'white'
         }
@@ -97,9 +97,12 @@ angular
       }
       return res
     }
-    
+
     return{
       getMainStyleByTime:getMainStyleByTime,
       getButtonStyleByTime:getButtonStyleByTime
     }
   })
+  .factory('Style', function ($rootScope) {
+
+})

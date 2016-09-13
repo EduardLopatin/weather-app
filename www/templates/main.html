@@ -1,34 +1,59 @@
-<div class="container-fluid mkill pkill" ng-style="mainStyle">
-  <!--header-->
-  <div class="bar-header bar-clear">
-    <button menu-toggle="left" ng-style="buttonsStyle" class="button button-clear  button-dark ion-android-menu"></button>
-    <button ng-style="buttonsStyle"  style="float: right" ui-sref="app.moreInfo" class="button button-clear button-dark" ng-controller="moreInfoCtrl"
-            ng-click="getMoreInfo(mainInfo.display_location.latitude,
-            mainInfo.display_location.longitude)">more</button>
-  </div>
-  <!--main block-->
-  <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
-    <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
-      <h5><i class="ion-ios-location-outline"> {{mainInfo.display_location.full}}</i></h5>
-      <h1 style="margin-top: 7vh">{{mainInfo.temp_c}}°C</h1>
-      <h5>{{mainInfo.weather}}</h5>
-    </div>
-    <!--second block-->
-    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="background: none">
-      <div>
-        <div   ng-repeat="item in forecastInfo | limitTo: -3">
-          <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
-           <div class="mpkill">
-            <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
-              {{item.date.weekday}}
+<ion-slide-box class="mpkill" on-slide-changed="slideHasChanged($index)" ng-style="mainStyle">
+  <ion-slide class="mpkill">
+    <div class="container-fluid mkill pkill">
+      <!--header-->
+      <div class="bar-header bar-clear">
+        <button menu-toggle="left" ng-style="buttonsStyle" class="button button-clear  button-dark ion-android-menu"></button>
+        <button style="float: right" ng-style="buttonsStyle" ng-controller="cityCtrl"
+                class="button button-outline text-right"
+                ng-click="addCityInList(mainInfo.display_location.full,
+                                    mainInfo.display_location.latitude,
+                                    mainInfo.display_location.longitude)">
+          add city
+        </button>
+      </div>
+      <!--main block-->
+      <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
+        <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
+          <h5><i class="ion-ios-location-outline"> {{mainInfo.display_location.full}}</i></h5>
+          <h1 style="margin-top: 7vh">{{mainInfo.temp_c+ '°C'}}</h1>
+          <h5>{{mainInfo.weather}}</h5>
+        </div>
+        <!--second block-->
+        <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12 secondBlock" style="background: none">
+          <div>
+            <div   ng-repeat="item in forecastInfo | limitTo: -3">
+              <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
+                <div class="mpkill">
+                  <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
+                    {{item.date.weekday}}
+                  </div>
+                  <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
+                    {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
-              {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
-            </div>
-           </div>
           </div>
         </div>
       </div>
     </div>
+  </ion-slide>
+  <ion-slide style="background-color: white; color: black">
+    <canvas id="line3" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-series="series" chart-options="options"
+            chart-dataset-override="datasetOverride">
+    </canvas>
+
+  <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+   <h3 class="text-center">Temperature chart</h3>
   </div>
-</div>
+  <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+    Relative humidity: {{mainInfo.relative_humidity}}<br>
+    Wind speed: {{mainInfo.wind_kph + ' kph'}}<br>
+    Pressure: {{mainInfo.pressure_mb + ' mb'}}<br>
+    {{mainInfo.estimated.description}}
+  </div>
+  </ion-slide>
+</ion-slide-box>
+

@@ -55,15 +55,6 @@ angular
           }
         }
       })
-      .state('app.moreInfo', {
-        url:'/moreInfo',
-        views:{
-          'menuContent':{
-            templateUrl:'templates/moreInfo.html',
-            controller:'moreInfoCtrl'
-          }
-        }
-      })
       .state('app.search',{
         url: '/search',
         views:{

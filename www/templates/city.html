@@ -1,41 +1,57 @@
-<div class="container-fluid mkill pkill bg" ng-style="mainStyle">
-  <!--header-->
-  <div class="bar-header bar-clear">
-    <button ng-style="buttonsStyle" class="button button-large button-icon ion-android-arrow-back" ng-click="back()"></button>
-    <button ng-style="buttonsStyle" style="float: right" ui-sref="app.moreInfo" class="button button-clear button-dark" ng-controller="moreInfoCtrl"
-            ng-click="getMoreInfo(searchCityMainInfo.display_location.latitude,
-            searchCityMainInfo.display_location.longitude)">more</button>
-  </div>
-  <!--main block-->
-  <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
-    <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
-      <h5><i class="ion-ios-location-outline"> {{searchCityMainInfo.display_location.full}}</i></h5>
-      <h1 style="margin-top: 7vh">{{searchCityMainInfo.temp_c}}°C</h1>
-      <h5>{{searchCityMainInfo.weather}}</h5>
-      <button ng-controller="cityCtrl"
-              class="button button-royal"
-              ng-click="addCityInList(searchCityMainInfo.display_location.full,
+<ion-slide-box class="mpkill" on-slide-changed="slideHasChanged($index)" ng-style="mainStyle">
+  <ion-slide class="mpkill">
+    <div class="container-fluid mkill pkill" >
+      <!--header-->
+      <div class="bar-header bar-clear">
+        <button ng-style="buttonsSearchStyle" class="button button-large button-icon ion-android-arrow-back" ng-click="back()"></button>
+        <button style="float: right" ng-style="buttonsSearchStyle" ng-controller="cityCtrl"
+                class="button button-outline text-right"
+                ng-click="addCityInList(searchCityMainInfo.display_location.full,
                                     searchCityMainInfo.display_location.latitude,
                                     searchCityMainInfo.display_location.longitude)">
-        add city
-      </button>
-    </div>
-    <!--second block-->
-    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="background: none">
-      <div>
-        <div   ng-repeat="item in forecastInfo | limitTo: -3">
-          <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
-            <div class="mpkill">
-              <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
-                {{item.date.weekday}}
-              </div>
-              <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
-                {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
+          add city
+        </button>
+      </div>
+      <!--main block-->
+      <div class="col-lg-12 col-sm-12  col-xl-12 col-xs-12 pkill">
+        <div id="test" class="col-sm-12  col-xl-12 col-xs-12 text-center mainBlock">
+          <h5><i class="ion-ios-location-outline"> {{searchCityMainInfo.display_location.full}}</i></h5>
+          <h1 style="margin-top: 7vh">{{searchCityMainInfo.temp_c}}°C</h1>
+          <h5>{{searchCityMainInfo.weather}}</h5>
+        </div>
+        <!--second block-->
+        <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12 secondBlock">
+          <div>
+            <div ng-repeat = "item in searchCityForecastInfo | limitTo: -3">
+              <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12" style="padding-bottom: 2vh">
+                <div class="mpkill">
+                  <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6">
+                    {{item.date.weekday}}
+                  </div>
+                  <div class="col-lg-6 col-sm-6 col-xl-6 col-xs-6 text-right">
+                    {{item.low.celsius + '-' + item.high.celsius + '°c'}}<br>{{item.conditions}}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </ion-slide>
+  <ion-slide  style="background-color: white; color: black">
+    <canvas id="line" class="chart chart-line" chart-data="data"
+            chart-labels="labels" chart-series="series" chart-options="options"
+            chart-dataset-override="datasetOverride">
+    </canvas>
+    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+      <h3 class="text-center">Temperature chart</h3>
+    </div>
+    <div class="col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+      Relative humidity: {{searchCityMainInfo.relative_humidity}}<br>
+      Wind speed: {{searchCityMainInfo.wind_kph + ' kph'}}<br>
+      Pressure: {{searchCityMainInfo.pressure_mb + ' mb'}}<br>
+      {{searchCityMainInfo.estimated.description}}
+    </div>
+  </ion-slide>
+</ion-slide-box>
