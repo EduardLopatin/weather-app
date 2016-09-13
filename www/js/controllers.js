@@ -40,30 +40,30 @@ angular
               console.log('res ' + CheckTime);
               $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
               $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime);
-              //   $scope.labels = [];
-              //   $scope.data = [];
-              // $rootScope.HourlyForecastInfo.forEach(function (item) {
-              //     $scope.labels.push(item.FCTTIME.hour);
-              //     $scope.data.push(item.temp.metric)
-              //   });
-              //   $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
-              //   $scope.options = {
-              //     scales: {
-              //       yAxes: [
-              //         {
-              //           id: 'y-axis-1',
-              //           type: 'linear',
-              //           display: true,
-              //           position: 'left'
-              //         }
-              //       ],
-              //       xAxes:[
-              //         {
-              //           display: false
-              //         }
-              //       ]
-              //     }
-              //   };
+                $scope.labels = [];
+                $scope.data = [];
+              $rootScope.HourlyForecastInfo.forEach(function (item) {
+                  $scope.labels.push(item.FCTTIME.hour);
+                  $scope.data.push(item.temp.metric)
+                });
+                $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
+                $scope.options = {
+                  scales: {
+                    yAxes: [
+                      {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left'
+                      }
+                    ],
+                    xAxes:[
+                      {
+                        display: false
+                      }
+                    ]
+                  }
+                };
               $rootScope.hide();
             })
         });
@@ -94,30 +94,6 @@ angular
           console.log('res '+CheckTime);
           $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
           $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime);
-          $scope.labels = [];
-            $scope.data = [];
-          $rootScope.searchHourlyForecastInfo.forEach(function (item) {
-              $scope.labels.push(item.FCTTIME.hour);
-              $scope.data.push(item.temp.metric)
-            });
-            $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }];
-            $scope.options = {
-              scales: {
-                yAxes: [
-                  {
-                    id: 'y-axis-1',
-                    type: 'linear',
-                    display: true,
-                    position: 'left'
-                  }
-                ],
-                xAxes:[
-                  {
-                    display: false
-                  }
-                ]
-              }
-            };
           $rootScope.hide();
         })
     }
@@ -139,20 +115,20 @@ angular
           $rootScope.searchHourlyForecastInfo = resp.data.hourly_forecast;
           var CheckTime = $rootScope.searchHourlyForecastInfo[0].FCTTIME.hour;
           console.log('res ' + CheckTime);
-          $rootScope.mainSearchStyle =  getStyle.getMainStyleByTime(CheckTime);
+          $rootScope.mainStyle =  getStyle.getMainStyleByTime(CheckTime);
           $rootScope.buttonsStyle = getStyle.getButtonStyleByTime(CheckTime);
           $rootScope.hide();
         })
     }})
   .controller('cityCtrl', function ($scope, $rootScope) {
     $rootScope.addCityInList = function (name, lat, lon) {
-
       $rootScope.cityArray.push({
         name: name,
         loc: lat + ',' + lon
       });
       localStorage.setItem('cityList',JSON.stringify($rootScope.cityArray));
       console.log($rootScope.cityArray);
+      alert('City successfully added!')
     };
     $rootScope.removeCity = function (loc) {
       $rootScope.cityArray.forEach(function (item, i, arr) {

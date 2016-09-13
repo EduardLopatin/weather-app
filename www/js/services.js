@@ -73,7 +73,7 @@ angular
         }
       }else {
         res = {
-          'background': 'url("img/Moon.png")',
+          'background': 'url("img/Blood.png")',
           'background-size': 'cover',
           'color': 'white'
         }
